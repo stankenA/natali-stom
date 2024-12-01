@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+main {
+  display: block;
+}
+
+img {
+  border-style: none;
+  outline: none;
+}
+
+button {
+  color: inherit;
+  background: none;
+  border: none;
+  font-size: 1em;
+  font-family: inherit;
+}
+
+a {
+  font-size: 1em;
+  text-decoration: none;
+  color: currentColor;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+
+button,
+input {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+fieldset {
+  border: none;
+}
+
+acronym {
+  cursor: help;
+  text-decoration: none;
+}
+
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  -webkit-appearance: button;
+}
+
+[type='checkbox'],
+[type='radio'] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+[type='number']::-webkit-inner-spin-button,
+[type='number']::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type='search'] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+[type='search']::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+[hidden] {
+  display: none;
+}

@@ -1,0 +1,32 @@
+:root {
+  // colors
+  --white: #fff;
+  --black: #000;
+
+  // fonts
+  --font: helvetica, arial, sans-serif;
+
+  // typo
+  // desktop (1024+)
+  --desktop-title-h1: 75px/75px var(--font);
+
+  // tablet (768–1023)
+  --tablet-title-h1: 56px/56px var(--font);
+
+  // mobile (360–767)
+  --mobile-title-h1: 36px/36px var(--font);
+
+  // utils
+  --scrollbar-width: calc(100vw - 100%);
+
+  // Layers
+  --z-under: -1;
+  --z-select: 1;
+  --z-button: 2;
+  --z-over: 3;
+  --z-side-button: 4;
+  --z-header: 5;
+  --z-cookie: 7;
+  --z-modal: 10;
+  --z-tooltip: 11;
+}

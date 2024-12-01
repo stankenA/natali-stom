@@ -1,0 +1,17 @@
+@import 'mixins';
+
+html {
+  scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--white);
+  text-rendering: optimizelegibility;
+  // font-family: var(--font-din-pro);
+}
+
+.overflow {
+  overflow: hidden;
+}

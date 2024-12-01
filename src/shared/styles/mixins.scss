@@ -1,0 +1,87 @@
+@mixin truncate-text-lines($lines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
+@mixin text-cropping {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin range($from, $to) {
+  @media (min-width: $from) and (max-width: $to) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (max-width: 1439px) {
+    @content;
+  }
+}
+
+@mixin from-tablet {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin from-mobile {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin to($to) {
+  @media (max-width: $to) {
+    @content;
+  }
+}
+@mixin from($from) {
+  @media (min-width: $from) {
+    @content;
+  }
+}
+
+@mixin font-adapt($font) {
+  font: var(--desktop-#{$font});
+
+  @include tablet {
+    font: var(--tablet-#{$font});
+  }
+
+  @include mobile {
+    font: var(--mobile-#{$font});
+  }
+}
+
+@mixin container {
+  max-width: var(--container-width);
+  padding-inline: var(--container-offset);
+  margin: 0 auto;
+
+  @include tablet {
+    padding-inline: var(--container-offset-tablet);
+  }
+
+  @include mobile {
+    padding-inline: var(--container-offset-mobile);
+  }
+}
