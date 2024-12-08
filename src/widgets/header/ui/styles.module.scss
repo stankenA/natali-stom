@@ -1,0 +1,25 @@
+.header {
+  width: 100%;
+  margin-top: 32px;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__logo {
+    border: 5px solid var(--blue);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 74px;
+    height: 74px;
+    color: var(--blue);
+  }
+
+  &__button {
+    width: 150px;
+  }
+}

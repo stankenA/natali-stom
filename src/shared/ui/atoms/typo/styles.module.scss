@@ -1,5 +1,11 @@
 .text {
   &-md {
-    color: red;
+    font-weight: 400;
+    font-size: 20px;
+  }
+
+  &-md-bold {
+    font-weight: 500;
+    font-size: 20px;
   }
 }

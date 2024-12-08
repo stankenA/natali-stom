@@ -2,9 +2,7 @@ import clsx from 'clsx';
 import styles from './styles.module.scss';
 import { HTMLAttributes, HTMLAttributeAnchorTarget, forwardRef, createElement } from 'react';
 
-export type TypoDesignToken =
-  | `title-${'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7'}`
-  | `text-${'md' | 'lg'}`;
+export type TypoDesignToken = `title-${'h1'}` | `text-${'md' | 'md-bold'}`;
 
 export type TypoTagNameType = keyof Omit<
   JSX.IntrinsicElements,

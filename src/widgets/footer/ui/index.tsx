@@ -1,9 +1,10 @@
+import { Container } from '@/shared/ui/atoms';
 import React, { FC } from 'react';
 
 export const Footer: FC = () => {
   return (
     <footer>
-      <div>footer</div>
+      <Container>Footer</Container>
     </footer>
   );
 };

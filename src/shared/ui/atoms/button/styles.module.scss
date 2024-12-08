@@ -1,0 +1,16 @@
+.button {
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 1px solid var(--blue);
+  cursor: pointer;
+
+  &_empty {
+    background-color: transparent;
+    color: var(--blue);
+  }
+
+  &_fill {
+    background-color: var(--blue);
+    color: var(--white);
+  }
+}
