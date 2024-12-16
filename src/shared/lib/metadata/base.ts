@@ -1,7 +1,7 @@
 export const baseMetadata = {
-  title: 'FSD Template',
+  title: 'DEV Стоматологический кабинет',
   description: 'Description',
   icons: {
-    icon: '/icons/favicon.svg',
+    icon: '/icons/favicon.png',
   },
 } as const;

@@ -1,5 +1,5 @@
 import { HomePage } from '@/pages-fsd/home';
 
-export default function Home() {
+export default async function Home() {
   return <HomePage />;
 }

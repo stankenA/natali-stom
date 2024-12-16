@@ -9,6 +9,14 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'src/shared/styles')],
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

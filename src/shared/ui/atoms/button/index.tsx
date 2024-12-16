@@ -3,9 +3,10 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import styles from './styles.module.scss';
 import { ButtonProps } from './types';
+import { Loader } from '../loader';
 
 export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonProps>(
-  ({ children, disabled, className, design = 'empty', ...props }, ref) => {
+  ({ children, disabled, className, design = 'empty', isLoading, ...props }, ref) => {
     const classNames = clsx(styles.button, styles[`button_${design}`], className);
 
     if ('href' in props) {
@@ -28,7 +29,7 @@ export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonPr
         ref={ref as ForwardedRef<HTMLButtonElement>}
         className={classNames}
       >
-        {children}
+        {isLoading ? <Loader size="sm" /> : children}
       </button>
     );
   },
