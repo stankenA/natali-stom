@@ -28,7 +28,7 @@ export const GET = async (req: NextRequest) => {
 
     const response = NextResponse.json({ idToken: id_token, accessToken: access_token });
 
-    response.cookies.set('authToken', access_token, {
+    response.cookies.set('accessToken', access_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       maxAge: 60,

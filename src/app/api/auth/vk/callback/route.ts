@@ -13,7 +13,7 @@ export const GET = async (req: NextRequest) => {
 
   try {
     const tokenResponse = await axios.post<{ access_token: string; user_id: string }>(
-      'https://id.vk.com/oauth2/auth',
+      'https://oauth.vk.com/access_token',
       qs.stringify({
         code,
         client_id: VK_CLIENT_ID,
@@ -22,13 +22,11 @@ export const GET = async (req: NextRequest) => {
       }),
     );
 
-    console.log(tokenResponse);
-
     const { access_token, user_id } = tokenResponse.data;
 
     const response = NextResponse.json({ accessToken: access_token, userId: user_id });
 
-    response.cookies.set('authToken', access_token, {
+    response.cookies.set('accessToken', access_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       maxAge: 60 * 15,

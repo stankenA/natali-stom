@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { baseMetadata } from '@/shared/lib/metadata';
 import { SvgSprite } from '@/shared/ui/atoms';
 import { Poppins } from 'next/font/google';
-// import { authApi } from '@/shared/api/requests';
 import { cookies } from 'next/headers';
-// import { User } from '@/entities/user';
+import { authApi } from '@/shared/api/requests';
+import { User } from '@/entities/user';
 import '@/shared/styles/index.scss';
 
 const poppins = Poppins({
@@ -23,13 +23,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const cookiesStore = cookies();
-  const accessToken = cookiesStore.get('authToken')?.value;
-  // let user;
+  const accessToken = cookiesStore.get('accessToken')?.value;
+  let user;
 
   if (accessToken) {
-    console.log(accessToken);
-    // const userInfo = await authApi.getGoogleUser({ accessToken });
-    // user = userInfo;
+    const userInfo = await authApi.getVkUser({ accessToken });
+    user = userInfo;
   }
 
   return (
@@ -38,7 +37,7 @@ export default async function RootLayout({
         {children}
         <div id="portal"></div>
         <SvgSprite />
-        {/* <User user={user} /> */}
+        <User user={user} />
       </body>
     </html>
   );

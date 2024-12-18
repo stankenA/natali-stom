@@ -1,5 +1,6 @@
 import { ApiUser } from '@/shared/lib/types';
 import axios from 'axios';
+import api from '..';
 
 export type AuthParams = {
   code: string;
@@ -10,8 +11,10 @@ export type GetUserInfoParams = {
 };
 
 const authWithGoogle = ({ code }: AuthParams) =>
-  axios
-    .get<{ idToken: string; accessToken: string }>(`/api/auth/google/callback?code=${code}`)
+  api
+    .get<{ idToken: string; accessToken: string }>('/api/auth/google/callback', {
+      params: { code },
+    })
     .then((res) => res.data);
 
 const getGoogleUser = ({ accessToken }: GetUserInfoParams) =>
@@ -24,19 +27,25 @@ const getGoogleUser = ({ accessToken }: GetUserInfoParams) =>
     .then((res) => res.data);
 
 const authWithVk = ({ code }: AuthParams) =>
-  axios
-    .get<{ accessToken: string; userId: string }>(`/api/auth/vk/callback?code=${code}`)
+  api
+    .get<{ accessToken: string; userId: string }>('/api/auth/vk/callback', { params: { code } })
     .then((res) => res.data);
 
-// const getVkUser = ({ accessToken }: GetUserInfoParams) =>
-//   axios.get(`/api/auth/vk/user-info?token=${accessToken}`).then((res) => res.data);
+const getVkUser = ({ accessToken }: GetUserInfoParams) =>
+  api
+    .get<ApiUser>('/api/auth/vk/user', {
+      params: {
+        accessToken,
+      },
+    })
+    .then((res) => res.data);
 
-const deleteAuthCookie = () => axios.post('/api/auth/logout');
+const deleteAuthCookie = () => api.post('/api/auth/logout');
 
 export const authApi = {
   authWithGoogle,
   getGoogleUser,
   deleteAuthCookie,
   authWithVk,
-  // getVkUser,
+  getVkUser,
 };

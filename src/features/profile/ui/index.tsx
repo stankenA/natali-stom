@@ -15,11 +15,11 @@ export const Profile: FC = () => {
   ]);
 
   const handleGoogleLogin = () => {
-    window.location.href = '/api/auth/google/login';
+    window.location.href = '/api/auth/google/redirect';
   };
 
   const handleVkLogin = () => {
-    window.location.href = '/api/auth/vk/login';
+    window.location.href = '/api/auth/vk/redirect';
   };
 
   return (
@@ -29,7 +29,7 @@ export const Profile: FC = () => {
           <Image
             width={50}
             height={50}
-            src={user.picture}
+            src={user.avatar}
             alt="Изображение профиля"
             className={styles.profile__image}
           />
