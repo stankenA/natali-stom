@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 export const GET = async () => {
   const scope = 'email';
 
-  const authUrl = `https://oauth.vk.com/authorize?client_id=${VK_CLIENT_ID}&redirect_uri=${VK_REDIRECT_URI}&response_type=code&scope=${scope}`;
+  const authUrl = `https://oauth.vk.com/authorize?client_id=${VK_CLIENT_ID}&redirect_uri=${VK_REDIRECT_URI}&response_type=code&scope=${scope}&state=vk`;
 
   return NextResponse.redirect(authUrl);
 };

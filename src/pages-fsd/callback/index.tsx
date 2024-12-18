@@ -23,17 +23,25 @@ export const CallbackPage = () => {
     const fetchUserData = async () => {
       const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get('code');
+      const state = urlParams.get('state');
 
-      if (!code) {
+      if (!code || !state) {
         setIsFailed(true);
 
         return;
       }
 
       try {
-        const { accessToken } = await authApi.authWithVk({ code });
-        const user = await authApi.getVkUser({ accessToken });
-        setUser(user);
+        const { accessToken } = await authApi.authUser({ code, state });
+
+        if (state === 'vk') {
+          const user = await authApi.getVkUser({ accessToken });
+          setUser(user);
+        } else if (state === 'google') {
+          const user = await authApi.getGoogleUser({ accessToken });
+          setUser(user);
+        }
+
         router.replace('/');
       } catch (error) {
         setIsFailed(true);

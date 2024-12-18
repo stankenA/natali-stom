@@ -24,11 +24,17 @@ export default async function RootLayout({
 }>) {
   const cookiesStore = cookies();
   const accessToken = cookiesStore.get('accessToken')?.value;
+  const provider = cookiesStore.get('provider')?.value;
   let user;
 
-  if (accessToken) {
-    const userInfo = await authApi.getVkUser({ accessToken });
-    user = userInfo;
+  if (accessToken && provider) {
+    if (provider === 'vk') {
+      const userInfo = await authApi.getVkUser({ accessToken });
+      user = userInfo;
+    } else if (provider === 'google') {
+      const userInfo = await authApi.getGoogleUser({ accessToken });
+      user = userInfo;
+    }
   }
 
   return (
