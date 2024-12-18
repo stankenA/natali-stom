@@ -14,8 +14,12 @@ export const Profile: FC = () => {
     userModel.logoutStatus,
   ]);
 
-  const handleLogin = () => {
-    window.location.href = '/api/auth/login';
+  const handleGoogleLogin = () => {
+    window.location.href = '/api/auth/google/login';
+  };
+
+  const handleVkLogin = () => {
+    window.location.href = '/api/auth/vk/login';
   };
 
   return (
@@ -34,9 +38,14 @@ export const Profile: FC = () => {
           </Button>
         </>
       ) : (
-        <Button design="fill" className={styles.profile__button} onClick={handleLogin}>
-          Войти
-        </Button>
+        <div className={styles.profile__login}>
+          <Button design="fill" className={styles.profile__button} onClick={handleGoogleLogin}>
+            Войти с Google
+          </Button>
+          <Button design="fill" className={styles.profile__button} onClick={handleVkLogin}>
+            Войти с VK ID
+          </Button>
+        </div>
       )}
     </div>
   );

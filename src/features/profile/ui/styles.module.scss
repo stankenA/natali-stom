@@ -6,4 +6,9 @@
   &__image {
     border-radius: 50%;
   }
+
+  &__login {
+    display: flex;
+    gap: 4px;
+  }
 }

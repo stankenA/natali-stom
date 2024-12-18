@@ -31,13 +31,18 @@ export const CallbackPage = () => {
       }
 
       try {
-        const { accessToken } = await authApi.authWithGoogle({ code });
-        const user = await authApi.getGoogleUser({ authToken: accessToken });
-        setUser(user);
-        router.replace('/');
-      } catch (error) {
-        setIsFailed(true);
-      }
+        const data = await authApi.authWithVk({ code });
+        console.log(data);
+      } catch (error) {}
+
+      // try {
+      //   const { accessToken } = await authApi.authWithGoogle({ code });
+      //   const user = await authApi.getGoogleUser({ authToken: accessToken });
+      //   setUser(user);
+      //   router.replace('/');
+      // } catch (error) {
+      //   setIsFailed(true);
+      // }
     };
 
     fetchUserData();
