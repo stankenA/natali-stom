@@ -14,14 +14,6 @@ export const Profile: FC = () => {
     userModel.logoutStatus,
   ]);
 
-  const handleGoogleLogin = () => {
-    window.location.href = '/api/auth/google/redirect';
-  };
-
-  const handleVkLogin = () => {
-    window.location.href = '/api/auth/vk/redirect';
-  };
-
   return (
     <div className={styles.profile}>
       {user ? (
@@ -39,10 +31,10 @@ export const Profile: FC = () => {
         </>
       ) : (
         <div className={styles.profile__login}>
-          <Button design="fill" className={styles.profile__button} onClick={handleGoogleLogin}>
+          <Button design="fill" className={styles.profile__button} href="/api/auth/google/redirect">
             Войти с Google
           </Button>
-          <Button design="fill" className={styles.profile__button} onClick={handleVkLogin}>
+          <Button design="fill" className={styles.profile__button} href="/api/auth/vk/redirect">
             Войти с VK ID
           </Button>
         </div>

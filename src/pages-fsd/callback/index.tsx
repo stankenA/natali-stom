@@ -13,6 +13,31 @@ export const CallbackPage = () => {
   const router = useRouter();
   const [isFailed, setIsFailed] = useState(false);
 
+  const authorizeUser = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    const state = urlParams.get('state');
+
+    if (!code || !state) {
+      setIsFailed(true);
+
+      return;
+    }
+
+    try {
+      const { accessToken, provider } = await authApi.authUser({ code, state });
+
+      if (provider === 'vk' || provider === 'google') {
+        const user = await authApi.getUserInfo({ accessToken, provider });
+        setUser(user);
+      }
+
+      router.replace('/');
+    } catch (error) {
+      setIsFailed(true);
+    }
+  };
+
   useEffect(() => {
     if (user) {
       router.replace('/');
@@ -20,36 +45,8 @@ export const CallbackPage = () => {
       return;
     }
 
-    const fetchUserData = async () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get('code');
-      const state = urlParams.get('state');
-
-      if (!code || !state) {
-        setIsFailed(true);
-
-        return;
-      }
-
-      try {
-        const { accessToken } = await authApi.authUser({ code, state });
-
-        if (state === 'vk') {
-          const user = await authApi.getVkUser({ accessToken });
-          setUser(user);
-        } else if (state === 'google') {
-          const user = await authApi.getGoogleUser({ accessToken });
-          setUser(user);
-        }
-
-        router.replace('/');
-      } catch (error) {
-        setIsFailed(true);
-      }
-    };
-
-    fetchUserData();
-  }, []);
+    authorizeUser();
+  }, [user]);
 
   return (
     <div className={styles.page}>

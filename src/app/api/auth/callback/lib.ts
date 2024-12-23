@@ -6,11 +6,10 @@ import {
   VK_CLIENT_SECRET,
   VK_REDIRECT_URI,
 } from '@/shared/config';
+import { OAuthProviders } from '@/shared/lib/types';
 import axios from 'axios';
 import { NextResponse } from 'next/server';
 import qs from 'querystring';
-
-export type OAuthProviders = 'vk' | 'google';
 
 type ApiTokenResponse = {
   access_token: string;
@@ -34,6 +33,7 @@ export const exchangeCodeForToken = async (provider: OAuthProviders, code: strin
         client_id: GOOGLE_CLIENT_ID,
         client_secret: GOOGLE_CLIENT_SECRET,
         redirect_uri: GOOGLE_REDIRECT_URI,
+        access_type: 'offline',
         grant_type: 'authorization_code',
       },
       responseMapper: (data: ApiTokenResponse) => ({
@@ -58,10 +58,9 @@ export const exchangeCodeForToken = async (provider: OAuthProviders, code: strin
 
   const { url, params, responseMapper, cookieMaxAge } = config[provider];
   const tokenResponse = await axios.post(url, qs.stringify(params));
-  console.log(tokenResponse);
 
   const { accessToken } = responseMapper(tokenResponse.data);
-  const response = NextResponse.json({ accessToken });
+  const response = NextResponse.json({ accessToken, provider });
 
   response.cookies.set('accessToken', accessToken, {
     httpOnly: true,

@@ -1,4 +1,4 @@
-import { ApiUser } from '@/shared/lib/types';
+import { ApiUser, OAuthProviders } from '@/shared/lib/types';
 import api from '..';
 
 export type AuthParams = {
@@ -8,30 +8,25 @@ export type AuthParams = {
 
 export type GetUserInfoParams = {
   accessToken: string;
+  provider: OAuthProviders;
 };
 
 const authUser = ({ code, state }: AuthParams) =>
   api
-    .get<{ accessToken: string }>('/api/auth/callback', { params: { code, state } })
+    .get<{ accessToken: string; provider: string }>('/api/auth/callback', {
+      params: { code, state },
+    })
     .then((res) => res.data);
 
-const getGoogleUser = ({ accessToken }: GetUserInfoParams) =>
-  api.get<ApiUser>('/api/auth/google/user', { params: { accessToken } }).then((res) => res.data);
-
-const getVkUser = ({ accessToken }: GetUserInfoParams) =>
+const getUserInfo = ({ accessToken, provider }: GetUserInfoParams) =>
   api
-    .get<ApiUser>('/api/auth/vk/user', {
-      params: {
-        accessToken,
-      },
-    })
+    .get<ApiUser>('/api/auth/user-info', { params: { accessToken, provider } })
     .then((res) => res.data);
 
 const deleteAuthCookie = () => api.post('/api/auth/logout');
 
 export const authApi = {
   authUser,
-  getGoogleUser,
   deleteAuthCookie,
-  getVkUser,
+  getUserInfo,
 };

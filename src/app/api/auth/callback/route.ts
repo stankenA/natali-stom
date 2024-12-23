@@ -15,7 +15,8 @@ export const GET = async (req: NextRequest) => {
 
   if (provider === 'vk' || provider === 'google') {
     try {
-      return await exchangeCodeForToken(provider, code);
+      const res = await exchangeCodeForToken(provider, code);
+      return res;
     } catch (error) {
       return NextResponse.json(
         { error: `Ошибка в обмене кода на токен: ${error}` },

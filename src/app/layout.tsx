@@ -27,14 +27,9 @@ export default async function RootLayout({
   const provider = cookiesStore.get('provider')?.value;
   let user;
 
-  if (accessToken && provider) {
-    if (provider === 'vk') {
-      const userInfo = await authApi.getVkUser({ accessToken });
-      user = userInfo;
-    } else if (provider === 'google') {
-      const userInfo = await authApi.getGoogleUser({ accessToken });
-      user = userInfo;
-    }
+  if (accessToken && (provider === 'vk' || provider === 'google')) {
+    const userInfo = await authApi.getUserInfo({ accessToken, provider });
+    user = userInfo;
   }
 
   return (
