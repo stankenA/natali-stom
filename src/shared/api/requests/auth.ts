@@ -11,7 +11,7 @@ export type GetUserInfoParams = {
   provider: OAuthProviders;
 };
 
-const authUser = ({ code, state }: AuthParams) =>
+const exchangeAuthCodeForToken = ({ code, state }: AuthParams) =>
   api
     .get<{ accessToken: string; provider: string }>('/api/auth/callback', {
       params: { code, state },
@@ -26,7 +26,7 @@ const getUserInfo = ({ accessToken, provider }: GetUserInfoParams) =>
 const deleteAuthCookie = () => api.post('/api/auth/logout');
 
 export const authApi = {
-  authUser,
+  exchangeAuthCodeForToken,
   deleteAuthCookie,
   getUserInfo,
 };

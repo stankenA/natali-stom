@@ -35,7 +35,7 @@ export const Profile: FC = () => {
             Войти с Google
           </Button>
           <Button design="fill" className={styles.profile__button} href="/api/auth/vk/redirect">
-            Войти с VK ID
+            Войти с VK
           </Button>
         </div>
       )}

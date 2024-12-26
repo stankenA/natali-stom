@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import qs from 'querystring';
 
 export const GET = async () => {
-  const scope = 'openid profile email';
+  const scope = 'profile email';
   const provider = 'google';
 
   const params = qs.stringify({

@@ -5,18 +5,18 @@ import React, { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import { authApi } from '@/shared/api/requests';
 import { useUnit } from 'effector-react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { userModel } from '@/entities/user';
 
 export const CallbackPage = () => {
   const [user, setUser] = useUnit([userModel.$user, userModel.setUser]);
-  const router = useRouter();
   const [isFailed, setIsFailed] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const authorizeUser = async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    const state = urlParams.get('state');
+    const code = searchParams.get('code');
+    const state = searchParams.get('state');
 
     if (!code || !state) {
       setIsFailed(true);
@@ -25,7 +25,7 @@ export const CallbackPage = () => {
     }
 
     try {
-      const { accessToken, provider } = await authApi.authUser({ code, state });
+      const { accessToken, provider } = await authApi.exchangeAuthCodeForToken({ code, state });
 
       if (provider === 'vk' || provider === 'google') {
         const user = await authApi.getUserInfo({ accessToken, provider });
